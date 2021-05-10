@@ -1,0 +1,16 @@
+# Run this archive using the command: docker-compose up
+# Access to mysql into the docker: docker exec -it mysql bash
+version: '3.1'
+services:
+  db:
+    image: mysql
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - scheduler_data:/var/lib/mysql
+
+volumes:
+  scheduler_data:

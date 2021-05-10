@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.springframework.cloud:spring-cloud-stream:test-jar:test-binder:3.1.2">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-stream/3.1.2/spring-cloud-stream-3.1.2-test-binder.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-stream/3.1.2/spring-cloud-stream-3.1.2-test-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-stream/3.1.2/spring-cloud-stream-3.1.2-test-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
