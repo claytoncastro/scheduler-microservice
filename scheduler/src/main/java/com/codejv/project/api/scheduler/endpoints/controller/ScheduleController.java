@@ -38,7 +38,7 @@ public class ScheduleController {
         return new ResponseEntity<>(scheduleService.findAll(pageable), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Schedule> findById(@PathVariable Long id) {
         return new ResponseEntity<>(scheduleService.findByIdOrThrowBadRequestException(id), HttpStatus.FOUND);
     }

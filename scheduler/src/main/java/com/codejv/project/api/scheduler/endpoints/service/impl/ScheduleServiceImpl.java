@@ -3,12 +3,11 @@ package com.codejv.project.api.scheduler.endpoints.service.impl;
 import com.codejv.project.api.core.model.Schedule;
 import com.codejv.project.api.core.repository.ScheduleRepository;
 import com.codejv.project.api.scheduler.endpoints.service.ScheduleService;
+import com.codejv.project.api.scheduler.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @Slf4j
@@ -31,15 +30,16 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public Schedule update(Schedule schedule) {
         log.info("Updating an schedule...");
-        Schedule scheduleToUpdate = findByIdOrThrowBadRequestException(schedule.getId());
-        return scheduleRepository.save(scheduleToUpdate);
+        findByIdOrThrowBadRequestException(schedule.getId());
+        return scheduleRepository.save(schedule);
     }
 
     @Override
     public Schedule findByIdOrThrowBadRequestException(Long id) {
         log.info("Finding an schedule by id: " + id);
         return scheduleRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Schedule not found"));
+                new ResourceNotFoundException(
+                        "Object not found! Id: " + id + ", Type: " + Schedule.class.getName()));
     }
 
     @Override

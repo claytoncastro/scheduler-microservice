@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -41,8 +42,9 @@ public class Schedule implements AbstractEntity {
     private String email;
     @Column(name = "telephone_number")
     private Long telephoneNumber;
+    @NotNull(message = "The field 'schedulerData' is mandatory")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "scheduler_data")
+    @Column(name = "scheduler_data", nullable = false)
     private LocalDate schedulerData;
 
 }
