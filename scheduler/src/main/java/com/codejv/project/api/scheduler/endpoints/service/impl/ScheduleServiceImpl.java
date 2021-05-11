@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -17,6 +19,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public Schedule save(Schedule schedule) {
+        if(!isDateAvailable(schedule.getSchedulerData())) {
+            throw new IllegalArgumentException("Schedule already registered!");
+        }
         log.info("Saving an schedule...");
         return scheduleRepository.save(schedule);
     }
@@ -47,6 +52,10 @@ public class ScheduleServiceImpl implements ScheduleService {
         log.info("Deleting an schedule by id: " + id);
         Long idToDelete = findByIdOrThrowBadRequestException(id).getId();
         scheduleRepository.deleteById(idToDelete);
+    }
+
+    private boolean isDateAvailable(LocalDate schedulerData) {
+        return scheduleRepository.findBySchedulerData(schedulerData).isEmpty();
     }
 
 }

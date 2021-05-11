@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,11 +25,13 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @PostMapping
+    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<Schedule> save(@Valid @RequestBody Schedule schedule) {
         return new ResponseEntity<>(scheduleService.save(schedule), HttpStatus.CREATED);
     }
 
     @PutMapping
+    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<Schedule> update(@Valid @RequestBody Schedule schedule) {
         return new ResponseEntity<>(scheduleService.update(schedule), HttpStatus.OK);
     }
@@ -44,6 +47,7 @@ public class ScheduleController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<Schedule> delete(@PathVariable Long id) {
         scheduleService.delete(id);
         return ResponseEntity.noContent().build();
