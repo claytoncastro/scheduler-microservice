@@ -2,6 +2,9 @@ package com.codejv.project.api.scheduler.endpoints.service.impl;
 
 import com.codejv.project.api.core.model.Schedule;
 import com.codejv.project.api.core.repository.ScheduleRepository;
+import com.codejv.project.api.scheduler.endpoints.mapper.ScheduleMapper;
+import com.codejv.project.api.scheduler.endpoints.requests.SchedulePostRequestBody;
+import com.codejv.project.api.scheduler.endpoints.requests.SchedulePutRequestBody;
 import com.codejv.project.api.scheduler.endpoints.service.ScheduleService;
 import com.codejv.project.api.scheduler.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +21,13 @@ public class ScheduleServiceImpl implements ScheduleService {
     private final ScheduleRepository scheduleRepository;
 
     @Override
-    public Schedule save(Schedule schedule) {
-        if(!isDateAvailable(schedule.getSchedulerData())) {
+    public Schedule save(SchedulePostRequestBody schedulePostRequestBody) {
+        if(!isDateAvailable(schedulePostRequestBody.getSchedulerData())) {
             throw new IllegalArgumentException("Schedule already registered!");
         }
         log.info("Saving an schedule...");
-        return scheduleRepository.save(schedule);
+        Schedule scheduleToSave = ScheduleMapper.INSTANCE.toSchedule(schedulePostRequestBody);
+        return scheduleRepository.save(scheduleToSave);
     }
 
     @Override
@@ -33,9 +37,11 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public Schedule update(Schedule schedule) {
+    public Schedule update(SchedulePutRequestBody schedulePutRequestBody) {
         log.info("Updating an schedule...");
-        findByIdOrThrowBadRequestException(schedule.getId());
+        Schedule savedSchedule = findByIdOrThrowBadRequestException(schedulePutRequestBody.getId());
+        Schedule schedule = ScheduleMapper.INSTANCE.toSchedule(schedulePutRequestBody);
+        schedule.setId(savedSchedule.getId());
         return scheduleRepository.save(schedule);
     }
 
@@ -49,8 +55,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public void delete(Long id) {
-        log.info("Deleting an schedule by id: " + id);
         Long idToDelete = findByIdOrThrowBadRequestException(id).getId();
+        log.info("Deleting an schedule by id: " + id);
         scheduleRepository.deleteById(idToDelete);
     }
 

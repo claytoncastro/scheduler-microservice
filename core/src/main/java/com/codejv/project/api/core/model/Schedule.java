@@ -28,21 +28,18 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Schedule implements AbstractEntity {
+public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
-    @NotBlank(message = "The field 'name' is mandatory")
     @Column(nullable = false)
     private String name;
-    @NotBlank(message = "The field 'email' is mandatory")
     @Column(nullable = false)
     private String email;
     @Column(name = "telephone_number")
     private Long telephoneNumber;
-    @NotNull(message = "The field 'schedulerData' is mandatory")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "scheduler_data", nullable = false)
     private LocalDate schedulerData;

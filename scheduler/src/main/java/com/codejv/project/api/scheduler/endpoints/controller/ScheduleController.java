@@ -1,6 +1,8 @@
 package com.codejv.project.api.scheduler.endpoints.controller;
 
 import com.codejv.project.api.core.model.Schedule;
+import com.codejv.project.api.scheduler.endpoints.requests.SchedulePostRequestBody;
+import com.codejv.project.api.scheduler.endpoints.requests.SchedulePutRequestBody;
 import com.codejv.project.api.scheduler.endpoints.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -26,14 +28,14 @@ public class ScheduleController {
 
     @PostMapping
     @Transactional(rollbackFor = Exception.class)
-    public ResponseEntity<Schedule> save(@Valid @RequestBody Schedule schedule) {
-        return new ResponseEntity<>(scheduleService.save(schedule), HttpStatus.CREATED);
+    public ResponseEntity<Schedule> save(@Valid @RequestBody SchedulePostRequestBody schedulePostRequestBody) {
+        return new ResponseEntity<>(scheduleService.save(schedulePostRequestBody), HttpStatus.CREATED);
     }
 
     @PutMapping
     @Transactional(rollbackFor = Exception.class)
-    public ResponseEntity<Schedule> update(@Valid @RequestBody Schedule schedule) {
-        return new ResponseEntity<>(scheduleService.update(schedule), HttpStatus.OK);
+    public ResponseEntity<Schedule> update(@Valid @RequestBody SchedulePutRequestBody schedulePutRequestBody) {
+        return new ResponseEntity<>(scheduleService.update(schedulePutRequestBody), HttpStatus.OK);
     }
 
     @GetMapping
