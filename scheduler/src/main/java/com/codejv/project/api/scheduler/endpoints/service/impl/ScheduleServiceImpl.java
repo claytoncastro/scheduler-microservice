@@ -2,13 +2,14 @@ package com.codejv.project.api.scheduler.endpoints.service.impl;
 
 import com.codejv.project.api.core.model.Schedule;
 import com.codejv.project.api.core.repository.ScheduleRepository;
-import com.codejv.project.api.scheduler.endpoints.mapper.ScheduleMapper;
-import com.codejv.project.api.scheduler.endpoints.requests.SchedulePostRequestBody;
-import com.codejv.project.api.scheduler.endpoints.requests.SchedulePutRequestBody;
+import com.codejv.project.api.scheduler.endpoints.requests.mapper.ScheduleMapper;
+import com.codejv.project.api.scheduler.endpoints.requests.dto.SchedulePostRequestBody;
+import com.codejv.project.api.scheduler.endpoints.requests.dto.SchedulePutRequestBody;
 import com.codejv.project.api.scheduler.endpoints.service.ScheduleService;
 import com.codejv.project.api.scheduler.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public Iterable<Schedule> findAll(Pageable pageable) {
+    public Page<Schedule> findAll(Pageable pageable) {
         log.info("Listing all schedule...");
         return scheduleRepository.findAll(pageable);
     }

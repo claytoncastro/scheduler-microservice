@@ -1,8 +1,8 @@
-package com.codejv.project.api.scheduler.endpoints.mapper;
+package com.codejv.project.api.scheduler.endpoints.requests.mapper;
 
 import com.codejv.project.api.core.model.Schedule;
-import com.codejv.project.api.scheduler.endpoints.requests.SchedulePostRequestBody;
-import com.codejv.project.api.scheduler.endpoints.requests.SchedulePutRequestBody;
+import com.codejv.project.api.scheduler.endpoints.requests.dto.SchedulePostRequestBody;
+import com.codejv.project.api.scheduler.endpoints.requests.dto.SchedulePutRequestBody;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Component;

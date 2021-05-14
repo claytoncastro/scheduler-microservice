@@ -1,10 +1,11 @@
 package com.codejv.project.api.scheduler.endpoints.controller;
 
 import com.codejv.project.api.core.model.Schedule;
-import com.codejv.project.api.scheduler.endpoints.requests.SchedulePostRequestBody;
-import com.codejv.project.api.scheduler.endpoints.requests.SchedulePutRequestBody;
+import com.codejv.project.api.scheduler.endpoints.requests.dto.SchedulePostRequestBody;
+import com.codejv.project.api.scheduler.endpoints.requests.dto.SchedulePutRequestBody;
 import com.codejv.project.api.scheduler.endpoints.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class ScheduleController {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Schedule>> findAll(Pageable pageable) {
+    public ResponseEntity<Page<Schedule>> findAll(Pageable pageable) {
         return new ResponseEntity<>(scheduleService.findAll(pageable), HttpStatus.OK);
     }
 

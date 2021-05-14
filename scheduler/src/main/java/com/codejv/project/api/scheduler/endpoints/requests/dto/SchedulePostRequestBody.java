@@ -1,4 +1,4 @@
-package com.codejv.project.api.scheduler.endpoints.requests;
+package com.codejv.project.api.scheduler.endpoints.requests.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,9 +10,8 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class SchedulePutRequestBody {
+public class SchedulePostRequestBody {
 
-    private Long id;
     @NotBlank(message = "The field 'name' is mandatory")
     private String name;
     @NotBlank(message = "The field 'email' is mandatory")
@@ -21,4 +20,5 @@ public class SchedulePutRequestBody {
     @NotNull(message = "The field 'schedulerData' is mandatory")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate schedulerData;
+
 }
