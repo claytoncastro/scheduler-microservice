@@ -1,5 +1,6 @@
 package com.codejv.project.api.scheduler.endpoints.requests.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
 public class SchedulePutRequestBody {
 
     private Long id;
