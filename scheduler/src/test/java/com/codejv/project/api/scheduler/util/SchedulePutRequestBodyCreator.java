@@ -12,7 +12,7 @@ public class SchedulePutRequestBodyCreator {
                 .name("Jhon Mayer")
                 .email("jhon_mayer@hotmail.com")
                 .telephoneNumber(855887744L)
-                .schedulerData(LocalDate.now())
+                .schedulerDate(LocalDate.now())
                 .build();
     }
 

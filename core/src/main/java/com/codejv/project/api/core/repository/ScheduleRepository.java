@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface ScheduleRepository extends PagingAndSortingRepository<Schedule, Long> {
 
-    @Query(value = "SELECT s.* FROM tb_schedule s WHERE DATE(scheduler_data)=:schedulerData", nativeQuery = true)
-    List<Schedule> findBySchedulerData(@Param("schedulerData") LocalDate schedulerData);
+    @Query(value = "SELECT s.* FROM tb_schedule s WHERE DATE(scheduler_date)=:schedulerDate", nativeQuery = true)
+    List<Schedule> findBySchedulerData(@Param("schedulerDate") LocalDate schedulerDate);
 
 }

@@ -22,5 +22,5 @@ public class SchedulePutRequestBody {
     private Long telephoneNumber;
     @NotNull(message = "The field 'schedulerData' is mandatory")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate schedulerData;
+    private LocalDate schedulerDate;
 }

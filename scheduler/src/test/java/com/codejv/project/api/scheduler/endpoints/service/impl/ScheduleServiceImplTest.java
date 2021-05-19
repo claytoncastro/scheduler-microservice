@@ -61,7 +61,7 @@ class ScheduleServiceImplTest {
                 .isEqualTo(ScheduleCreator.createValidSchedule());
         assertThat(scheduleSaved.getName()).isEqualTo(scheduleToBeSaved.getName());
         assertThat(scheduleSaved.getEmail()).isEqualTo(scheduleToBeSaved.getEmail());
-        assertThat(scheduleSaved.getSchedulerDate()).isEqualTo(scheduleToBeSaved.getSchedulerData());
+        assertThat(scheduleSaved.getSchedulerDate()).isEqualTo(scheduleToBeSaved.getSchedulerDate());
         assertThat(scheduleSaved.getTelephoneNumber()).isEqualTo(scheduleToBeSaved.getTelephoneNumber());
 
     }

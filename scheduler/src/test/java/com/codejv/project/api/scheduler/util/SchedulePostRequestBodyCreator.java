@@ -11,7 +11,7 @@ public class SchedulePostRequestBodyCreator {
                 .name("Jhon Mayer")
                 .email("jhon_mayer123123@hotmail.com")
                 .telephoneNumber(855887744L)
-                .schedulerData(LocalDate.now())
+                .schedulerDate(LocalDate.now())
                 .build();
     }
 

@@ -27,7 +27,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public Schedule save(SchedulePostRequestBody schedulePostRequestBody) {
-        isScheduleDateAvailable(schedulePostRequestBody.getSchedulerData());
+        isScheduleDateAvailable(schedulePostRequestBody.getSchedulerDate());
         log.info("Saving an schedule...");
         Schedule scheduleToSave = ScheduleMapper.INSTANCE.toSchedule(schedulePostRequestBody);
         return scheduleRepository.save(scheduleToSave);

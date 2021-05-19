@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -26,13 +26,18 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="b56e3d93-f69c-4843-93e1-e6812069fb8c">
-        <schema name="schedule" object-types="index, table, column, function, constraint, procedure, view" />
+        <schema name="mysql" object-types="table, view, procedure, function" />
+        <schema name="schedule" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="b56e3d93-f69c-4843-93e1-e6812069fb8c">
-      <console name="Connection" type="STANDARD" schema="mysql" session="Main" />
+      <console name="Connection 1" type="STANDARD" schema="schedule" session="Main"><![CDATA[select * from tb_application_user;
+--insert into tb_application_user(authorities, name, password, username) values ('ROLE_ADMIN,ROLE_USER', 'Clayton Catro', '{bcrypt}$2a$10$ews66Ne5zlCDUilMtIdSueHdkn0UxTUVuKSQSw5RLed06CRfogExW', 'clayton');
+--insert into tb_application_user(authorities, name, password, username) values ('ROLE_USER', 'Test User', '{bcrypt}$2a$10$ews66Ne5zlCDUilMtIdSueHdkn0UxTUVuKSQSw5RLed06CRfogExW', 'test');
+
+--SELECT a.* FROM tb_application_user a WHERE a.username='test';]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -40,6 +45,10 @@
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="b56e3d93-f69c-4843-93e1-e6812069fb8c" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="b56e3d93-f69c-4843-93e1-e6812069fb8c" dataset="schedule.tb_schedule" active-filter-id="" />
+    <filter-actions connection-id="b56e3d93-f69c-4843-93e1-e6812069fb8c" dataset="schedule.tb_application_user" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />

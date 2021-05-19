@@ -1,5 +1,8 @@
 package com.codejv.project.api.scheduler.security.config;
 
+import com.codejv.project.api.scheduler.endpoints.service.impl.ApplicationUserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,7 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@Slf4j
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final ApplicationUserDetailsServiceImpl applicationUserDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -28,14 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
-        auth.inMemoryAuthentication()
-                .withUser("clayton")
-                .password(passwordEncoder.encode("123"))
-                .roles("USER", "ADMIN")
-                .and()
-                .withUser("test")
-                .password(passwordEncoder.encode("123"))
-                .roles("USER");
+        log.info("Password encoded {}", passwordEncoder.encode("test"));
+
+        auth.userDetailsService(applicationUserDetailsService).passwordEncoder(passwordEncoder);
 
     }
 }

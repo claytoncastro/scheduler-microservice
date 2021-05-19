@@ -42,13 +42,13 @@ public class ResourceAlreadyExistDetails extends ErrorDetails {
         }
 
         public ResourceAlreadyExistDetails build() {
-            ResourceAlreadyExistDetails resourceNotFoundDetails = new ResourceAlreadyExistDetails();
-            resourceNotFoundDetails.setDetail(detail);
-            resourceNotFoundDetails.setDeveloperMessage(developerMessage);
-            resourceNotFoundDetails.setTitle(title);
-            resourceNotFoundDetails.setStatus(status);
-            resourceNotFoundDetails.setTimestamp(timestamp);
-            return resourceNotFoundDetails;
+            ResourceAlreadyExistDetails resourceAlreadyExistDetails = new ResourceAlreadyExistDetails();
+            resourceAlreadyExistDetails.setDetail(detail);
+            resourceAlreadyExistDetails.setDeveloperMessage(developerMessage);
+            resourceAlreadyExistDetails.setTitle(title);
+            resourceAlreadyExistDetails.setStatus(status);
+            resourceAlreadyExistDetails.setTimestamp(timestamp);
+            return resourceAlreadyExistDetails;
         }
     }
 
