@@ -1,7 +1,9 @@
 package com.codejv.project.api.scheduler.exceptions.handler;
 
+import com.codejv.project.api.scheduler.exceptions.ResourceAlreadyExistException;
 import com.codejv.project.api.scheduler.exceptions.ResourceNotFoundException;
 import com.codejv.project.api.scheduler.exceptions.details.ErrorDetails;
+import com.codejv.project.api.scheduler.exceptions.details.ResourceAlreadyExistDetails;
 import com.codejv.project.api.scheduler.exceptions.details.ResourceNotFoundDetails;
 import com.codejv.project.api.scheduler.exceptions.details.ValidationErrorDetails;
 import org.springframework.http.HttpHeaders;
@@ -31,6 +33,19 @@ public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Resource not found")
                 .detail(rnfException.getMessage())
                 .developerMessage(rnfException.getClass().getName())
+                .build();
+        return new ResponseEntity<>(resourceNotFound, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ResourceAlreadyExistException.class)
+    public ResponseEntity<Object> handlerResourceNotFoundException(ResourceAlreadyExistException raeException) {
+        ResourceAlreadyExistDetails resourceNotFound = ResourceAlreadyExistDetails.Builder
+                .newBuilder()
+                .timestamp(new Date().getTime())
+                .status(HttpStatus.CONFLICT.value())
+                .title("Resource already exist")
+                .detail(raeException.getMessage())
+                .developerMessage(raeException.getClass().getName())
                 .build();
         return new ResponseEntity<>(resourceNotFound, HttpStatus.NOT_FOUND);
     }

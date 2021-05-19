@@ -22,18 +22,18 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(path = "v1/admin/schedules")
+@RequestMapping(path = "v1/schedules")
 @RequiredArgsConstructor
 public class ScheduleController {
     private final ScheduleService scheduleService;
 
-    @PostMapping
+    @PostMapping(path = "/admin")
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<Schedule> save(@Valid @RequestBody SchedulePostRequestBody schedulePostRequestBody) {
         return new ResponseEntity<>(scheduleService.save(schedulePostRequestBody), HttpStatus.CREATED);
     }
 
-    @PutMapping
+    @PutMapping(path = "/admin")
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<Schedule> update(@Valid @RequestBody SchedulePutRequestBody schedulePutRequestBody) {
         return new ResponseEntity<>(scheduleService.update(schedulePutRequestBody), HttpStatus.OK);
@@ -44,12 +44,12 @@ public class ScheduleController {
         return new ResponseEntity<>(scheduleService.findAll(pageable), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(path = "/{id}")
     public ResponseEntity<Schedule> findById(@PathVariable Long id) {
         return new ResponseEntity<>(scheduleService.findByIdOrThrowBadRequestException(id), HttpStatus.FOUND);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(path = "/admin/{id}")
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<Schedule> delete(@PathVariable Long id) {
         scheduleService.delete(id);

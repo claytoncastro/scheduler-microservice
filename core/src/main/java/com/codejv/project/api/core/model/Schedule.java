@@ -39,7 +39,7 @@ public class Schedule {
     @Column(name = "telephone_number")
     private Long telephoneNumber;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "scheduler_data", nullable = false)
-    private LocalDate schedulerData;
+    @Column(name = "scheduler_date", nullable = false)
+    private LocalDate schedulerDate;
 
 }

@@ -2,6 +2,8 @@ package com.codejv.project.api.scheduler.endpoints.service.impl;
 
 import com.codejv.project.api.core.model.Schedule;
 import com.codejv.project.api.core.repository.ScheduleRepository;
+import com.codejv.project.api.scheduler.endpoints.requests.dto.SchedulePostRequestBody;
+import com.codejv.project.api.scheduler.exceptions.ResourceAlreadyExistException;
 import com.codejv.project.api.scheduler.exceptions.ResourceNotFoundException;
 import com.codejv.project.api.scheduler.util.ScheduleCreator;
 import com.codejv.project.api.scheduler.util.SchedulePostRequestBodyCreator;
@@ -19,6 +21,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -50,11 +53,27 @@ class ScheduleServiceImplTest {
     @Test
     @DisplayName("save returns Schedule when successful")
     void save_ReturnsSchedule_WhenSuccessful(){
-        Schedule scheduleSaved = scheduleService.save(SchedulePostRequestBodyCreator.createSchedulePostRequestBody());
+        SchedulePostRequestBody scheduleToBeSaved = SchedulePostRequestBodyCreator.createSchedulePostRequestBody();
+        Schedule scheduleSaved = scheduleService.save(scheduleToBeSaved);
 
         assertThat(scheduleSaved)
                 .isNotNull()
                 .isEqualTo(ScheduleCreator.createValidSchedule());
+        assertThat(scheduleSaved.getName()).isEqualTo(scheduleToBeSaved.getName());
+        assertThat(scheduleSaved.getEmail()).isEqualTo(scheduleToBeSaved.getEmail());
+        assertThat(scheduleSaved.getSchedulerDate()).isEqualTo(scheduleToBeSaved.getSchedulerData());
+        assertThat(scheduleSaved.getTelephoneNumber()).isEqualTo(scheduleToBeSaved.getTelephoneNumber());
+
+    }
+
+    @Test
+    @DisplayName("save throw ResourceAlreadyExistException when scheduleDate already exist")
+    void save_ThrowResourceAlreadyExistException_WhenScheduleDateExist() {
+        BDDMockito.when(scheduleRepositoryMok.findBySchedulerData(ArgumentMatchers.any(LocalDate.class)))
+                .thenReturn(Collections.singletonList(ScheduleCreator.createValidSchedule()));
+
+        assertThatExceptionOfType(ResourceAlreadyExistException.class)
+                .isThrownBy(() -> this.scheduleService.save(SchedulePostRequestBodyCreator.createSchedulePostRequestBody()));
     }
 
     @Test

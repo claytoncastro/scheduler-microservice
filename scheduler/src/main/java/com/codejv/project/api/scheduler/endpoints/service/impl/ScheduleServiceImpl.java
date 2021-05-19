@@ -2,10 +2,11 @@ package com.codejv.project.api.scheduler.endpoints.service.impl;
 
 import com.codejv.project.api.core.model.Schedule;
 import com.codejv.project.api.core.repository.ScheduleRepository;
-import com.codejv.project.api.scheduler.endpoints.requests.mapper.ScheduleMapper;
 import com.codejv.project.api.scheduler.endpoints.requests.dto.SchedulePostRequestBody;
 import com.codejv.project.api.scheduler.endpoints.requests.dto.SchedulePutRequestBody;
+import com.codejv.project.api.scheduler.endpoints.requests.mapper.ScheduleMapper;
 import com.codejv.project.api.scheduler.endpoints.service.ScheduleService;
+import com.codejv.project.api.scheduler.exceptions.ResourceAlreadyExistException;
 import com.codejv.project.api.scheduler.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,18 +15,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@SuppressWarnings("java:S2201")
 public class ScheduleServiceImpl implements ScheduleService {
     private final ScheduleRepository scheduleRepository;
 
     @Override
     public Schedule save(SchedulePostRequestBody schedulePostRequestBody) {
-        if(!isDateAvailable(schedulePostRequestBody.getSchedulerData())) {
-            throw new IllegalArgumentException("Schedule already registered!");
-        }
+        isScheduleDateAvailable(schedulePostRequestBody.getSchedulerData());
         log.info("Saving an schedule...");
         Schedule scheduleToSave = ScheduleMapper.INSTANCE.toSchedule(schedulePostRequestBody);
         return scheduleRepository.save(scheduleToSave);
@@ -61,8 +63,11 @@ public class ScheduleServiceImpl implements ScheduleService {
         scheduleRepository.deleteById(idToDelete);
     }
 
-    private boolean isDateAvailable(LocalDate schedulerData) {
-        return scheduleRepository.findBySchedulerData(schedulerData).isEmpty();
+    private void isScheduleDateAvailable(LocalDate schedulerDate) {
+        Optional.ofNullable(scheduleRepository.findBySchedulerData(schedulerDate))
+                .filter(List::isEmpty)
+                .orElseThrow(() -> new ResourceAlreadyExistException(
+                        "Object with date " + schedulerDate + "already exist"));
     }
 
 }
