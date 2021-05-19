@@ -26,8 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="b56e3d93-f69c-4843-93e1-e6812069fb8c">
-        <schema name="mysql" object-types="table, view, procedure, function" />
-        <schema name="schedule" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
+        <schema name="schedule" object-types="table, view, procedure, function" />
       </connection>
     </loaded-nodes>
   </component>

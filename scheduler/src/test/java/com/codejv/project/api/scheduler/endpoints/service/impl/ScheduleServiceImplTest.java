@@ -69,7 +69,7 @@ class ScheduleServiceImplTest {
     @Test
     @DisplayName("save throw ResourceAlreadyExistException when scheduleDate already exist")
     void save_ThrowResourceAlreadyExistException_WhenScheduleDateExist() {
-        BDDMockito.when(scheduleRepositoryMok.findBySchedulerData(ArgumentMatchers.any(LocalDate.class)))
+        BDDMockito.when(scheduleRepositoryMok.findBySchedulerDate(ArgumentMatchers.any(LocalDate.class)))
                 .thenReturn(Collections.singletonList(ScheduleCreator.createValidSchedule()));
 
         assertThatExceptionOfType(ResourceAlreadyExistException.class)

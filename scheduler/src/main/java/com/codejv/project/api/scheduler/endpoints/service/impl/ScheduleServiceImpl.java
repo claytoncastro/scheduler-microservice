@@ -64,10 +64,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     private void isScheduleDateAvailable(LocalDate schedulerDate) {
-        Optional.ofNullable(scheduleRepository.findBySchedulerData(schedulerDate))
+        Optional.ofNullable(scheduleRepository.findBySchedulerDate(schedulerDate))
                 .filter(List::isEmpty)
                 .orElseThrow(() -> new ResourceAlreadyExistException(
-                        "Object with date " + schedulerDate + "already exist"));
+                        "Object with date " + schedulerDate + " already exist"));
     }
 
 }
