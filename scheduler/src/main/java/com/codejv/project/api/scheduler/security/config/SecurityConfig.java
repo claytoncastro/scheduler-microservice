@@ -27,6 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/v1/schedules/**").hasRole("USER")
                     .anyRequest().authenticated()
                 .and()
+                    .formLogin()
+                .and()
                     .httpBasic();
     }
 

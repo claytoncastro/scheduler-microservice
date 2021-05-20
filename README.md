@@ -1,4 +1,4 @@
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/claytoncastro/scheduler-microservice/maven)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/claytoncastro/scheduler-microservice/maven?label=Build)
 ![GitHub last commit](https://img.shields.io/github/last-commit/claytoncastro/scheduler-microservice?label=Last%20Commit)
 
 # System for scheduling medical consultation
@@ -7,6 +7,12 @@
 * Java 1.8
 * Maven 3.8.1
 * Docker
+
+### About
+
+This is a system for scheduling medical consultation. Must save a schedule, but does not allow you to save Schedule 
+with the same schedule date. In the future, a microservice will be implemented to send emails for the person who was 
+scheduled as well as it's saves a history of schedules.
 
 ### First steps
 You need to follow some steps to run this application.
@@ -37,4 +43,44 @@ Before starting the application, make sure that the MySQL image status is "up" i
 ~~~
 docker ps -a
 ~~~
-Now you are ready to start the application.
+
+#### Users
+For use this application you must have one user to access the system. Run the sql command on the archive ***user-sql.sql***
+on the path below;
+~~~
+  schedule-microservice/util/sql
+~~~
+
+**Now you are ready to start and test the application!**
+
+### Documentation
+
+You can see the documentation through of the URI below: 
+~~~
+  http://localhost:8081/swagger-ui.html
+~~~
+
+You have to be logged, you can use one of the users saved then.
+
+* The user called "Admin Test" have the followed roles:
+  ~~~
+    ROLE_ADMIN, ROLE_USER
+  ~~~
+* The user called "User Test" have the followed roles:
+  ~~~
+    ROLE_USER
+  ~~~
+
+#### Roles
+The role ***ROLE_ADMIN*** can execute the followed requests:
+~~~
+  GET, PUT, POST and DELETE
+~~~
+
+The role ***ROLE_USER*** can execute only the followed request:
+~~~
+  GET
+~~~
+
+### More Details
+This application is being built and have some things to be implemented yet.
