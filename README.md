@@ -71,16 +71,12 @@ You have to be logged, you can use one of the users saved then.
     ROLE_USER
   ~~~
 
-#### Roles
-The role ***ROLE_ADMIN*** can execute the followed requests:
-~~~
-  GET, PUT, POST and DELETE
-~~~
+#### Roles Access
 
-The role ***ROLE_USER*** can execute only the followed request:
-~~~
-  GET
-~~~
+| Role Type  | GET      | POST      | PUT       | DELETE  |
+:----------- | :------: | :-------: | :-------: | :-------:
+| ROLE_ADMIN | X        | X         | X         | X       |
+| ROLE_USER  | X        |           |           |         |
 
 ### More Details
 This application is being built and have some things to be implemented yet.
