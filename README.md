@@ -1,4 +1,4 @@
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/claytoncastro/scheduler-microservice/maven?label=Build)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/claytoncastro/scheduler-microservice/maven.yml?label=Build)
 ![GitHub last commit](https://img.shields.io/github/last-commit/claytoncastro/scheduler-microservice?label=Last%20Commit)
 
 # System for scheduling medical consultation
